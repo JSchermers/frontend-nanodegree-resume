@@ -1,3 +1,4 @@
+//global object for maintanance
 var globals = {
 	"workExperience" : $("#workExperience"),
 	"project" : $("#projects"),
@@ -137,17 +138,17 @@ var education = {
 			}
 		}
 		globals.education.append(globals.HTMLonlineClasses);
-		var headingOnlineEducation = $("h3");
 
 		for (var onlineCourse in education.onlineCourses) {
+			globals.education.append(globals.HTMLschoolStart);
 			var onlineTitle = globals.HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineCourse].title);
 			var onlineSchool = globals.HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineCourse].school);
 			var onlineDates = globals.HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].dates);
 			var onlineUrl = globals.HTMLonlineURL.replace("%data%", education.onlineCourses[onlineCourse].url);
-			$(headingOnlineEducation).append(onlineTitle);
-			$(headingOnlineEducation).append(onlineSchool);
-			$(headingOnlineEducation).append(onlineDates);
-			$(headingOnlineEducation).append(onlineUrl);
+			$(".education-entry:last").append(onlineTitle);
+			$(".education-entry:last").append(onlineSchool);
+			$(".education-entry:last").append(onlineDates);
+			$(".education-entry:last").append(onlineUrl);
 		}
 	}
 }
@@ -241,9 +242,7 @@ projects.display();
 education.display();
 work.display();
 
-//log clicks
 // Your code goes here! Let me help you get started
-
 function locationizer(work_obj) {
 	var locations = [];
 	for (var work in work_obj.jobs) {
@@ -252,19 +251,11 @@ function locationizer(work_obj) {
 	return locations;
 }
 
-function inName(name){
-	name = name.trim().split(" ");
- 	name[1] = name[1].toUpperCase();
-    name[0] = name[0].charAt(0).toUpperCase() + name[0].slice(1).toLowerCase();
-
-    return name[0] + " " + name[1];
-}
-
 // Did locationizer() work? This line will tell you!
 console.log(locationizer(work));
 
 $('#main').append(globals.internationalizeButton);
-$("#mapDiv").append(googleMap);
+$("#mapDiv").append(globals.googleMap);
 
 
 
