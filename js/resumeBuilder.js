@@ -148,7 +148,6 @@ var education = {
 			$(headingOnlineEducation).append(onlineSchool);
 			$(headingOnlineEducation).append(onlineDates);
 			$(headingOnlineEducation).append(onlineUrl);
-
 		}
 	}
 }
@@ -232,7 +231,6 @@ var projects = {
 						$(".project-entry:last").append(projectImg);
 				}
 			}
-
 		}
 	}
 
@@ -254,42 +252,20 @@ function locationizer(work_obj) {
 	return locations;
 }
 
-// Did locationizer() work? This line will tell you!
-
-console.log(locationizer(work));
-
-
-
 function inName(name){
 	name = name.trim().split(" ");
  	name[1] = name[1].toUpperCase();
     name[0] = name[0].charAt(0).toUpperCase() + name[0].slice(1).toLowerCase();
 
     return name[0] + " " + name[1];
-
 }
+
+// Did locationizer() work? This line will tell you!
+console.log(locationizer(work));
 
 $('#main').append(globals.internationalizeButton);
 $("#mapDiv").append(googleMap);
 
-$(document).click(function(loc){
-	var x = loc.clientX;
-	var y = loc.clientY;
-	logClicks(x,y);
-})
 
 
-var html = '<script src="http://hackyourwebsite.com/eviljavascript.js"></script>';
 
-var charEscape = function(_html) {
-    var newHTML = _html;
-    // How will you make sure that newHTML doesn't contain any < or > ?
-    // Your code goes here!
-    newHTML = newHTML.replace(/</g, '');
-    newHTML = newHTML.replace(/>/g, '');
-    // Don't delete this line!
-    return newHTML;
-};
-
-// Did your code work? The line below will tell you!
-console.log(charEscape(html));
