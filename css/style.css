@@ -217,3 +217,46 @@ span {
     display: block;
   }
 }
+
+/* visualization */
+.node circle {
+ fill: #fff;
+ stroke: steelblue;
+ stroke-width: 1.5px;
+}
+.node {
+ font: 14px sans-serif;
+}
+.link {
+ fill: none;
+ stroke: #ccc;
+ stroke-width: 1.5px;
+}
+
+.skillstart {
+  border-bottom: 1px solid darkblue;
+  min-height: 400px;
+}
+
+.jobname {
+  font-size:14px;
+  fill:darkblue;
+}
+
+.jobtitle, .jobemployer {
+  font-size:13px;
+  fill:#666;
+}
+
+@media only screen and (min-width: 750px) {
+  .jobname {
+    font-size:13px;
+  }
+
+  .jobtitle, .jobemployer {
+    font-size:11px;
+  }
+
+
+}
+

@@ -258,5 +258,51 @@ $('#main').append(globals.internationalizeButton);
 $("#mapDiv").append(globals.googleMap);
 
 
+// data visualization of json objects
+var width = 800;
+var height = 400;
+var tree = d3.layout.tree()
+	.size([height, width-400]);
+
+var diagonal = d3.svg.diagonal()
+	.projection (function(d) {return [d.y, d.x];});
+
+var svg = d3.select("#skillsChart").append("svg")
+	.attr("viewBox", "0 0 " + width + " " + height )
+    .attr("preserveAspectRatio", "xMidYMid meet")
+	.append("g")
+	.attr("transform", "translate(50, -50)");
+
+d3.json("work.json", function(root){
+	var nodes = tree.nodes(root);
+	var links = tree.links(nodes);
+	var link = svg.selectAll(".link")
+		.data(links)
+		.enter().append("path")
+		.attr("class", "link")
+		.attr("d", diagonal);
+	var node = svg.selectAll(".node")
+		.data(nodes)
+		.enter().append("g")
+		.attr("class", "node")
+		.attr("transform", function(d) { return "translate(" + d.y + ", " + d.x + ")"; });
+	node.append("circle")
+		.attr("r", 4.5);
+	node.append("text")
+		.attr("dx", function(d) { return d.children ? 8 : 8; })
+		.attr("dy", -4)
+		.attr("class", "jobname")
+		.text(function(d){return d.name});
+	node.append("text")
+		.attr("dx", function(d) { return d.children ? 8 : 8; })
+		.attr("dy", 16)
+		.attr("class", "jobemployer")
+		.text( function(d){return d.employer});
+	node.append("text")
+		.attr("dx", function(d) { return d.children ? 8 : 8; })
+		.attr("dy", 36)
+		.attr("class", "jobtitle")
+		.text( function(d){return d.title});
+});
 
 
