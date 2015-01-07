@@ -233,7 +233,7 @@ span {
  stroke-width: 1.5px;
 }
 
-.skillstart {
+.skilltree {
   border-bottom: 1px solid darkblue;
   min-height: 400px;
 }
@@ -250,11 +250,11 @@ span {
 
 @media only screen and (min-width: 750px) {
   .jobname {
-    font-size:13px;
+    font-size:11px;
   }
 
   .jobtitle, .jobemployer {
-    font-size:11px;
+    font-size:10px;
   }
 
 
