@@ -26,6 +26,9 @@ You need to have a local webserver for the json file which d3 uses. (to overcome
 ### d3
 <https://github.com/mbostock/d3/wiki/Tutorials/>
 
+#### tree layout of json object
+<https://github.com/mbostock/d3/wiki/Tree-Layout#_tree/>
+
 ### jshint
 <http://jshint.com/install/>
 
