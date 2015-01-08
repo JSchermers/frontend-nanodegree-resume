@@ -1,4 +1,9 @@
-//global object for maintanance
+/*global $:false */
+"use strict";
+
+/*
+global object for maintanance in one file
+ */
 var globals = {
 	"workExperience" : $("#workExperience"),
 	"project" : $("#projects"),
@@ -42,8 +47,11 @@ var globals = {
 	"HTMLonlineURL" : HTMLonlineURL,
 	"internationalizeButton" : internationalizeButton,
 	"googleMap" : googleMap
-}
+};
 
+/*
+Bio object for bio info with display() function
+ */
 var bio = {
 	"name": "Joost Schermers",
 	"role": "Web developer",
@@ -57,35 +65,49 @@ var bio = {
 	"picture_url": "http://upload.wikimedia.org/wikipedia/en/0/02/Homer_Simpson_2006.png",
 	"Welcome_message": "This is my awesome portfolio. Please checkout my projects",
 	"skills": ["html", "css", "javascript", "web design", "scrum", "nodejs", "awesomeness"],
-	"display": function(){
-		var formattedName = globals.HTMLheaderName.replace("%data%", bio.name);
-		var formattedRole = globals.HTMLheaderRole.replace("%data%", bio.role);
-		var mobile = globals.HTMLmobile.replace("%data%" , bio.contacts.mobile);
-		var email = globals.HTMLemail.replace("%data%" , bio.contacts.email);
-		var github = globals.HTMLgithub.replace("%data%", bio.contacts.github);
-		var twitter = globals.HTMLtwitter.replace("%data%", bio.contacts.twitter);
-		var picture = globals.HTMLbioPic.replace("%data%", bio.picture_url);
-		var welcomeMessage = globals.HTMLWelcomeMsg.replace("%data%", bio.Welcome_message);
 
+	//Show bio info on screen with display() function
+	"display": function(){
+		var formattedName = globals.HTMLheaderName.replace("%data%", bio.name),
+			formattedRole = globals.HTMLheaderRole.replace("%data%", bio.role),
+			mobile = globals.HTMLmobile.replace("%data%" , bio.contacts.mobile),
+			email = globals.HTMLemail.replace("%data%" , bio.contacts.email),
+			github = globals.HTMLgithub.replace("%data%", bio.contacts.github),
+			twitter = globals.HTMLtwitter.replace("%data%", bio.contacts.twitter),
+			picture = globals.HTMLbioPic.replace("%data%", bio.picture_url),
+			welcomeMessage = globals.HTMLWelcomeMsg.replace("%data%", bio.Welcome_message);
+
+		//append to #header
 		globals.header.prepend(formattedRole);
 		globals.header.prepend(formattedName);
 		globals.header.append(welcomeMessage);
 		globals.header.append(picture);
+
+		//append to top contacts
 		globals.topContacts.append(mobile);
+		globals.topContacts.append(email);
+		globals.topContacts.append(github);
+		globals.topContacts.append(twitter);
+
+		//append to footer contacts
 		globals.footerContacts.append(email);
 		globals.footerContacts.append(github);
-		globals.footerContacts.append(twitter)
+		globals.footerContacts.append(twitter);
 
+		//add skills to #header if available
 		if (bio.skills.length > 0) {
 			globals.header.append(globals.htmlSkillStart);
 			for (var i = 0; i < bio.skills.length; i++){
-				var bioSkill = globals.htmlSkill.replace("%data%", bio.skills[i])
+				var bioSkill = globals.htmlSkill.replace("%data%", bio.skills[i]);
 				$("#skills").append(bioSkill);
 			}
 		}
 	}
-}
+};
 
+/*
+Edcucation Object for education info with display() function
+ */
 var education = {
     "schools": [
         {
@@ -118,18 +140,23 @@ var education = {
             "url": "https://www.codeschool.com/courses/try-jquery"
 	    }
 	],
+
+	//Show education info on screen with display() function
 	"display" : function() {
 		for (var school in education.schools) {
 			globals.education.append(globals.HTMLschoolStart);
-			var schoolName = globals.HTMLschoolName.replace("%data%", education.schools[school].name);
-			var schoolDegree = globals.HTMLschoolDegree.replace("%data%", education.schools[school].graduation);
-			var schoolYears = globals.HTMLschoolDates.replace("%data%", education.schools[school].years);
-			var schoolLocation = globals.HTMLschoolLocation.replace("%data%", education.schools[school].location);
+			var schoolName = globals.HTMLschoolName.replace("%data%", education.schools[school].name),
+				schoolDegree = globals.HTMLschoolDegree.replace("%data%", education.schools[school].graduation),
+				schoolYears = globals.HTMLschoolDates.replace("%data%", education.schools[school].years),
+				schoolLocation = globals.HTMLschoolLocation.replace("%data%", education.schools[school].location);
+
+			//append to .education-entry
 			$(".education-entry:last").append(schoolName);
 			$(".education-entry:last").append(schoolDegree);
 			$(".education-entry:last").append(schoolYears);
 			$(".education-entry:last").append(schoolLocation);
 
+			//if majors available append them
 			if (education.schools[school].majors.length > 0 ){
 				for (var major in education.schools[school].majors) {
 						var majorEntry = globals.HTMLschoolMajor.replace("%data%", education.schools[school].majors[major]);
@@ -137,22 +164,31 @@ var education = {
 				}
 			}
 		}
+
+		//append online classes from education
 		globals.education.append(globals.HTMLonlineClasses);
 
 		for (var onlineCourse in education.onlineCourses) {
+			var onlineTitle = globals.HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineCourse].title),
+				onlineSchool = globals.HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineCourse].school),
+				onlineDates = globals.HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].dates),
+				onlineUrl = globals.HTMLonlineURL.replace("%data%", education.onlineCourses[onlineCourse].url);
+
+			//append div schoolstart to html
 			globals.education.append(globals.HTMLschoolStart);
-			var onlineTitle = globals.HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineCourse].title);
-			var onlineSchool = globals.HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineCourse].school);
-			var onlineDates = globals.HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].dates);
-			var onlineUrl = globals.HTMLonlineURL.replace("%data%", education.onlineCourses[onlineCourse].url);
+
+			//append online classes info to html
 			$(".education-entry:last").append(onlineTitle);
 			$(".education-entry:last").append(onlineSchool);
 			$(".education-entry:last").append(onlineDates);
 			$(".education-entry:last").append(onlineUrl);
 		}
 	}
-}
+};
 
+/*
+Work object for work info with display() function
+ */
 var work = {
 	"jobs": [
 		{
@@ -177,15 +213,21 @@ var work = {
 			"description": "Working as a Front end developer on SharePoint platform for intranet"
 		}
 	],
+
+	//Show work info on screen with display() function
 	"display" : function() {
 		for (var job in work.jobs){
+			var emp = globals.HTMLworkEmployer.replace("%data%", work.jobs[job].employer),
+				jobEmp = globals.HTMLworkTitle.replace("%data%", work.jobs[job].title),
+				date = globals.HTMLworkDates.replace("%data%", work.jobs[job].dates),
+				loc = globals.HTMLworkLocation.replace("%data%", work.jobs[job].location),
+				desc = globals.HTMLworkDescription.replace("%data%", work.jobs[job].description),
+				workItem = emp + " " + jobEmp;
+
+			//append div workstart to html
 			globals.workExperience.append(globals.HTMLworkStart);
-			var emp = globals.HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-			var jobEmp = globals.HTMLworkTitle.replace("%data%", work.jobs[job].title);
-			var date = globals.HTMLworkDates.replace("%data%", work.jobs[job].dates);
-			var loc = globals.HTMLworkLocation.replace("%data%", work.jobs[job].location);
-			var desc = globals.HTMLworkDescription.replace("%data%", work.jobs[job].description);
-			var workItem = emp + " " + jobEmp;
+
+			//append work info to html
 			$(".work-entry:last").append(workItem);
 			$(".work-entry:last").append(date);
 			$(".work-entry:last").append(loc);
@@ -194,6 +236,9 @@ var work = {
 	}
 };
 
+/*
+Projects Object for project info with display() function
+ */
 var projects = {
 	"projects" : [
 		{
@@ -215,17 +260,23 @@ var projects = {
 			"images": ["http://www.mflora.nl/images/logo.jpg", "http://www.mflora.nl/php/rotate.php?slide=../images/slideshow/ontwerp/&697"]
 		}
 	],
+
+	//Show projects info on screen with display() function
 	"display" : function(){
 		for (var project in projects.projects) {
-			globals.project.append(HTMLprojectStart);
-			var projectTitle = globals.HTMLprojectTitle.replace("%data%", projects.projects[project].title);
-			var projectDate = globals.HTMLprojectDates.replace("%data%", projects.projects[project].dates);
-			var projectDesc = globals.HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+			var projectTitle = globals.HTMLprojectTitle.replace("%data%", projects.projects[project].title),
+				projectDate = globals.HTMLprojectDates.replace("%data%", projects.projects[project].dates),
+				projectDesc = globals.HTMLprojectDescription.replace("%data%", projects.projects[project].description);
 
+			//append div projectstart to html
+			globals.project.append(HTMLprojectStart);
+
+			//append project info to html
 			$(".project-entry:last").append(projectTitle);
 			$(".project-entry:last").append(projectDate);
 			$(".project-entry:last").append(projectDesc);
 
+			//if images available append them to html
 			if (projects.projects[project].images.length > 0 ){
 				for (var image in projects.projects[project].images) {
 						var projectImg = globals.HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
@@ -234,85 +285,77 @@ var projects = {
 			}
 		}
 	}
+};
 
-}
-
+/*
+call display() functions for resume
+ */
 bio.display();
 projects.display();
 education.display();
 work.display();
 
-// Your code goes here! Let me help you get started
-function locationizer(work_obj) {
-	var locations = [];
-	for (var work in work_obj.jobs) {
-		locations.push(work_obj.jobs[work].location);
-	}
-	return locations;
-}
-
-// Did locationizer() work? This line will tell you!
-console.log(locationizer(work));
-
-$('#main').append(globals.internationalizeButton);
+/*
+Append internationalizeButtom & googleMap to html
+ */
+$("#main").append(globals.internationalizeButton);
 $("#mapDiv").append(globals.googleMap);
 
-
-// data visualization object of json objects with d3
+/*
+Extra mile ;)
+data visualization object of json objects with d3
+*/
 var Visualization = (function () {
-	var width = 800;
-	var height = 400;
-	var tree = d3.layout.tree()
-					.size([height, width - 400]);
-	var diagonal = d3.svg.diagonal()
-					.projection(function(d){return [d.y, d.x];});
-	var svg = d3.select("#skillsTree").append("svg")
-		.attr("viewBox", "0 0 " + width + " " + height )
-	    .attr("preserveAspectRatio", "xMidYMid meet")
-		.append("g")
-		.attr("transform", "translate(50, -50)");
-	var display = function(data) {
-		d3.json(data, function(root){
-			var nodes = tree.nodes(root);
-			var links = tree.links(nodes);
-			var link = svg.selectAll(".link")
-				.data(links)
-				.enter().append("path")
-				.attr("class", "link")
-				.attr("d", diagonal);
-			var node = svg.selectAll(".node")
-				.data(nodes)
-				.enter().append("g")
-				.attr("class", "node")
-				.attr("transform", function(d) { return "translate(" + d.y + ", " + d.x + ")"; });
-			node.append("circle")
-				.attr("r", 4.5);
-			node.append("text")
-				.attr("dx", function(d) { return d.children ? 8 : 8; })
-				.attr("dy", -4)
-				.attr("class", "jobname")
-				.text(function(d){return d.name});
-			node.append("text")
-				.attr("dx", function(d) { return d.children ? 8 : 8; })
-				.attr("dy", 16)
-				.attr("class", "jobemployer")
-				.text( function(d){return d.employer});
-			node.append("text")
-				.attr("dx", function(d) { return d.children ? 8 : 8; })
-				.attr("dy", 36)
-				.attr("class", "jobtitle")
-				.text( function(d){return d.title});
-			});
-		};
-		return {
-			displayVisualization : display
-		};
-
+	var width = 800,
+		height = 400,
+		tree = d3.layout.tree()
+				.size([height, width - 400]),
+		diagonal = d3.svg.diagonal()
+					.projection(function(d){return [d.y, d.x];}),
+		svg = d3.select("#skillsTree").append("svg")
+			.attr("viewBox", "0 0 " + width + " " + height )
+		    .attr("preserveAspectRatio", "xMidYMid meet")
+			.append("g")
+			.attr("transform", "translate(50, -50)"),
+		display = function(data) {
+			d3.json(data, function(root){
+				var nodes = tree.nodes(root),
+					links = tree.links(nodes),
+					link = svg.selectAll(".link")
+						.data(links)
+						.enter().append("path")
+						.attr("class", "link")
+						.attr("d", diagonal),
+					node = svg.selectAll(".node")
+						.data(nodes)
+						.enter().append("g")
+						.attr("class", "node")
+						.attr("transform", function(d) { return "translate(" + d.y + ", " + d.x + ")"; });
+					node.append("circle")
+						.attr("r", 4.5);
+					node.append("text")
+						.attr("dx", function(d) { return d.children ? 8 : 8; })
+						.attr("dy", -4)
+						.attr("class", "jobname")
+						.text(function(d){return d.name;});
+					node.append("text")
+						.attr("dx", function(d) { return d.children ? 8 : 8; })
+						.attr("dy", 16)
+						.attr("class", "jobemployer")
+						.text( function(d){return d.employer;});
+					node.append("text")
+						.attr("dx", function(d) { return d.children ? 8 : 8; })
+						.attr("dy", 36)
+						.attr("class", "jobtitle")
+						.text( function(d){return d.title;});
+					});
+			};
+			return {
+				displayVisualization : display
+			};
 })();
-//create visualization
+
+/*
+create visualization
+*/
 Visualization.displayVisualization("work.json");
-
-
-
-
-
