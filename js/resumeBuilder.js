@@ -302,6 +302,15 @@ $("#main").append(globals.internationalizeButton);
 $("#mapDiv").append(globals.googleMap);
 
 /*
+Log clicks
+ */
+$(document).click(function(loc) {
+	var x = loc.clientX,
+		y = loc.clientY;
+	logClicks(x, y);
+});
+
+/*
 Extra mile ;)
 data visualization object of json objects with d3
 */
