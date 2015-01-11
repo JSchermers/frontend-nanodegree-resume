@@ -239,22 +239,26 @@ span {
 }
 
 .jobname {
-  font-size:14px;
-  fill:darkblue;
+  font-size: 14px;
+  fill: darkblue;
 }
 
 .jobtitle, .jobemployer {
-  font-size:13px;
-  fill:#666;
+  font-size: 13px;
+  fill: #666;
+}
+
+.work-name {
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 750px) {
   .jobname {
-    font-size:11px;
+    font-size: 11px;
   }
 
   .jobtitle, .jobemployer {
-    font-size:10px;
+    font-size: 10px;
   }
 }
 

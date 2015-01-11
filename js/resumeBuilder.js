@@ -331,9 +331,14 @@ var Visualization = (function () {
 					.projection(function(d){return [d.y, d.x];}),
 		svg = d3.select("#skillsTree").append("svg")
 			.attr("viewBox", "0 0 " + width + " " + height )
+			.attr({
+				xmlns: "http://www.w3.org/2000/svg",
+        		xlink: "http://www.w3.org/1999/xlink"
+			})
 		    .attr("preserveAspectRatio", "xMidYMid meet")
 			.append("g")
 			.attr("transform", "translate(50, -50)"),
+		//add json file
 		display = function(data) {
 			d3.json(data, function(root){
 				var nodes = tree.nodes(root),
@@ -350,7 +355,19 @@ var Visualization = (function () {
 						.attr("transform", function(d) { return "translate(" + d.y + ", " + d.x + ")"; });
 					node.append("circle")
 						.attr("r", 4.5);
-					node.append("text")
+					node.append("a")
+						.attr({"x:link:href" : "#"})
+						//Conditionally add class in url is available
+						.attr("class", function(d){
+							if(d.url) {
+								return "work-name"
+							}
+						})
+						.on("click", function(d, i){
+							d3.select(this)
+								.attr({"xlink:href": d.url});
+						})
+						.append("text")
 						.attr("dx", function(d) { return d.children ? 8 : 8; })
 						.attr("dy", -4)
 						.attr("class", "jobname")
