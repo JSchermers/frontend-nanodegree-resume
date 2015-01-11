@@ -62,9 +62,9 @@ var bio = {
 			"twitter": "https://twitter.com/jschermers",
 			"location": "Gouda, the Netherlands"
 	},
-	"picture_url": "http://upload.wikimedia.org/wikipedia/en/0/02/Homer_Simpson_2006.png",
-	"Welcome_message": "This is my awesome portfolio. Please checkout my projects",
+	"welcomeMessage": "This is my awesome portfolio. Please checkout my projects",
 	"skills": ["html", "css", "javascript", "web design", "scrum", "nodejs", "awesomeness"],
+	"biopic": "http://upload.wikimedia.org/wikipedia/en/0/02/Homer_Simpson_2006.png",
 
 	//Show bio info on screen with display() function
 	"display": function(){
@@ -74,8 +74,8 @@ var bio = {
 			email = globals.HTMLemail.replace("%data%" , bio.contacts.email),
 			github = globals.HTMLgithub.replace("%data%", bio.contacts.github),
 			twitter = globals.HTMLtwitter.replace("%data%", bio.contacts.twitter),
-			picture = globals.HTMLbioPic.replace("%data%", bio.picture_url),
-			welcomeMessage = globals.HTMLWelcomeMsg.replace("%data%", bio.Welcome_message);
+			picture = globals.HTMLbioPic.replace("%data%", bio.biopic),
+			welcomeMessage = globals.HTMLWelcomeMsg.replace("%data%", bio.welcomeMessage);
 
 		//append to #header
 		globals.header.prepend(formattedRole);
@@ -113,16 +113,18 @@ var education = {
         {
             "name": "Haagse Hoge School",
             "location": "The Hague",
+            "degree": "Yes",
             "majors": ["French", "German"],
-            "years": "4 years",
-            "graduation": "Yes"
+            "dates": "2002",
+            "url": "http://www.dehaagsehogeschool.nl/"
         },
         {
             "name": "Goudse Scholen Gemeenschap",
             "location": "Gouda",
+            "degree": "Yes",
             "majors": ["Dutch", "Geography"],
-            "years": "6 years",
-            "graduation": "Yes"
+            "dates": "1998",
+            "url": "http://www.gsgleovroman.nl/"
         }
 
     ],
@@ -130,13 +132,13 @@ var education = {
 	 	{
             "title": "Udacity front end nano degree",
             "school": "Udacity",
-            "dates": "04-12-2014 -- 06-09-2015",
+            "date": "06-09-2015",
             "url": "https://www.udacity.com/course/nd001"
 	    },
     	{
             "title": "JQuery",
             "school": "Gouda",
-            "dates": "04-12-2012 -- 01-03-2012",
+            "date": "01-03-2012",
             "url": "https://www.codeschool.com/courses/try-jquery"
 	    }
 	],
@@ -146,15 +148,18 @@ var education = {
 		for (var school in education.schools) {
 			globals.education.append(globals.HTMLschoolStart);
 			var schoolName = globals.HTMLschoolName.replace("%data%", education.schools[school].name),
-				schoolDegree = globals.HTMLschoolDegree.replace("%data%", education.schools[school].graduation),
-				schoolYears = globals.HTMLschoolDates.replace("%data%", education.schools[school].years),
+				schoolDegree = globals.HTMLschoolDegree.replace("%data%", education.schools[school].degree),
+				schoolDates = globals.HTMLschoolDates.replace("%data%", education.schools[school].dates),
 				schoolLocation = globals.HTMLschoolLocation.replace("%data%", education.schools[school].location);
 
 			//append to .education-entry
 			$(".education-entry:last").append(schoolName);
 			$(".education-entry:last").append(schoolDegree);
-			$(".education-entry:last").append(schoolYears);
+			$(".education-entry:last").append(schoolDates);
 			$(".education-entry:last").append(schoolLocation);
+
+			//change href attr of schoolname
+			$(".education-entry:last a").attr("href", education.schools[school].url);
 
 			//if majors available append them
 			if (education.schools[school].majors.length > 0 ){
@@ -171,7 +176,7 @@ var education = {
 		for (var onlineCourse in education.onlineCourses) {
 			var onlineTitle = globals.HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineCourse].title),
 				onlineSchool = globals.HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineCourse].school),
-				onlineDates = globals.HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].dates),
+				onlineDate = globals.HTMLonlineDates.replace("%data%", education.onlineCourses[onlineCourse].date),
 				onlineUrl = globals.HTMLonlineURL.replace("%data%", education.onlineCourses[onlineCourse].url);
 
 			//append div schoolstart to html
@@ -180,8 +185,11 @@ var education = {
 			//append online classes info to html
 			$(".education-entry:last").append(onlineTitle);
 			$(".education-entry:last").append(onlineSchool);
-			$(".education-entry:last").append(onlineDates);
+			$(".education-entry:last").append(onlineDate);
 			$(".education-entry:last").append(onlineUrl);
+
+			//change href attr of onlineTitle
+			$(".education-entry:last a").attr("href", education.onlineCourses[onlineCourse].url);
 		}
 	}
 };
@@ -195,21 +203,21 @@ var work = {
 			"employer": "PGGM",
 			"title": "Front end developer",
 			"location": "Zeist",
-			"dates": "01-01-2012 -- 12-12-2014",
+			"dates": "01-01-2012 - 12-12-2014",
 			"description": "Working as a Front end developer on SharePoint platform for public facing websites"
 		},
 		{
 			"employer": "Deventer Ziekenhuis",
 			"title": "Front end developer, Sharepoint consultant",
 			"location": "Deventer",
-			"dates": "01-01-2012 -- 01-04-2012",
+			"dates": "01-01-2012 - 01-04-2012",
 			"description": "Working as a Front end developer on SharePoint platform  for public facing websites"
 		},
 		{
 			"employer": "Heineken",
 			"title": "Front end developer, SharePoint developer",
 			"location": "Amsterdam",
-			"dates": "01-01-2011 -- 01-01-2012",
+			"dates": "01-01-2011 - 01-01-2012",
 			"description": "Working as a Front end developer on SharePoint platform for intranet"
 		}
 	],
@@ -249,13 +257,13 @@ var projects = {
 		},
 		{
 			"title": "Resume with css only",
-			"dates": "01-10-2014",
+			"dates": "01-10-2014 - 31-10-2014",
 			"description": "A timeline resume build with some javascript libraries with pure experimental css",
 			"images": ["http://eduweb.hhs.nl/~10074546/afbeeldingen/cv.jpg"]
 		},
 		{
 			"title": "Mflora",
-			"dates": "01-10-2011",
+			"dates": "01-10-2011 - 31-12-2011",
 			"description": "A website for a gardener in Gouda. Started my first html5 project there.",
 			"images": ["http://www.mflora.nl/images/logo.jpg", "http://www.mflora.nl/php/rotate.php?slide=../images/slideshow/ontwerp/&697"]
 		}
